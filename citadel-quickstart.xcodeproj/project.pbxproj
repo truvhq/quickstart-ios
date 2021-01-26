@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0000CD8325BF357600FCF086 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0000CD8225BF357600FCF086 /* Constants.swift */; };
+		0000CD8825BF980900FCF086 /* Citadel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0000CD8725BF980900FCF086 /* Citadel.swift */; };
 		3A2E865325ADBAC6000D93BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2E865225ADBAC6000D93BA /* AppDelegate.swift */; };
 		3A2E865925ADBACA000D93BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A2E865825ADBACA000D93BA /* Assets.xcassets */; };
 		3A2E865C25ADBACA000D93BA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A2E865B25ADBACA000D93BA /* Preview Assets.xcassets */; };
@@ -33,6 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0000CD8225BF357600FCF086 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0000CD8725BF980900FCF086 /* Citadel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Citadel.swift; sourceTree = "<group>"; };
 		3A2E864F25ADBAC6000D93BA /* citadel-quickstart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "citadel-quickstart.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A2E865225ADBAC6000D93BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A2E865825ADBACA000D93BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -100,6 +104,8 @@
 				3A2E865225ADBAC6000D93BA /* AppDelegate.swift */,
 				3A2E865825ADBACA000D93BA /* Assets.xcassets */,
 				3A2E865A25ADBACA000D93BA /* Preview Content */,
+				0000CD8225BF357600FCF086 /* Constants.swift */,
+				0000CD8725BF980900FCF086 /* Citadel.swift */,
 			);
 			path = "citadel-quickstart";
 			sourceTree = "<group>";
@@ -261,6 +267,8 @@
 			files = (
 				3A2E868A25ADBB22000D93BA /* ViewController.swift in Sources */,
 				3A2E865325ADBAC6000D93BA /* AppDelegate.swift in Sources */,
+				0000CD8825BF980900FCF086 /* Citadel.swift in Sources */,
+				0000CD8325BF357600FCF086 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

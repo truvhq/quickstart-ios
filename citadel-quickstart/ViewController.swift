@@ -1,12 +1,10 @@
 import UIKit
 import WebKit
 
-struct BridgeTokenResponse: Decodable {
-    var bridge_token: String
-}
-
 class ViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler {
 
+    lazy var citadel = Citadel()
+    
     lazy var webView: WKWebView = {
         let webConfiguration = WKWebViewConfiguration()
         webConfiguration.userContentController.add(self, name: "iosListener")
@@ -41,6 +39,15 @@ class ViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler {
             if (event == "onClose") {
                 doneScreen.result = "Verification wasn't finished"
             } else {
+                let publicToken = (payload?["public_token"] as! String)
+                citadel.getAccessToken(publicToken: publicToken) { accessToken, error in
+                    
+                    self.citadel.getEmploymentInfoByToken(accessToken: (accessToken as! String)) { result, error in
+                        if(result != nil) {
+                            print(result!["provider"])
+                        }
+                    }
+                }
                 doneScreen.result = "Successful verification. Public Token: " + (payload?["public_token"] as! String)
             }
             present(doneScreen, animated: true)
@@ -76,39 +83,16 @@ class ViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler {
         //        let jsonData = try? JSONSerialization.data(withJSONObject: json)
 
                 // create post request
-        let url = URL(string: "https://dev.citadelid.com/v1/bridge-tokens/")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("d19ca76e3d4e4220bc671d198f8a3bb0", forHTTPHeaderField: "X-Access-Client-Id")
-        request.setValue("prod-83247e495dad61638f1b872fa7e98fb21dc0fc27", forHTTPHeaderField: "X-Access-Secret")
-
-                // insert json data to the request
-        //        request.httpBody = jsonData
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {
-                print(error?.localizedDescription ?? "No data")
-                return
-            }
-            
-            do {
-                let decoder = JSONDecoder()
-                let decodedData = try decoder.decode(BridgeTokenResponse.self, from: data)
-                print(decodedData.bridge_token)
-                let uuid = NSUUID().uuidString
-                var components = URLComponents(string: "https://cdn-dev.citadelid.com/mobile.html")
-                components?.queryItems = [URLQueryItem(name: "bridge_token", value: decodedData.bridge_token),
-                                          URLQueryItem(name: "product", value: "employment"),
-                                          URLQueryItem(name: "tracking_info", value: uuid),
-                                          URLQueryItem(name: "client", value: "Your company name")]
-                let myRequest = URLRequest(url: (components?.url)!)
-                self.webView.load(myRequest)
-            } catch {
-                print("Something went wrond")
-            }
+        citadel.getBridgeToken() { bridgeToken, error in
+            let uuid = NSUUID().uuidString
+            var components = URLComponents(string: "https://cdn-dev.citadelid.com/mobile.html")
+            components?.queryItems = [URLQueryItem(name: "bridge_token", value: bridgeToken),
+                                      URLQueryItem(name: "product", value: CitadelProductType),
+                                      URLQueryItem(name: "tracking_info", value: uuid),
+                                      URLQueryItem(name: "client", value: "Your company name")]
+            let myRequest = URLRequest(url: (components?.url)!)
+            self.webView.load(myRequest)
         }
-
-        task.resume()
-        
     }
 }
 
