@@ -12,16 +12,20 @@ struct BridgeTokenResponse: Decodable {
 }
 
 struct AccessTokenResponse: Decodable {
-    var access_tokens: [String]
+    var access_token: String
 }
 
 class Citadel {
     
     func getBridgeToken (completionHandler:@escaping (String?, Error?) -> Void ) -> URLSessionTask {
         let url = URL(string: "\(CitadelAPIUrl)bridge-tokens/")!
+        let json: [String: Any] = ["product_type": CitadelProductType]
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
+        request.httpBody = jsonData
         request.setValue(CitadelClientID, forHTTPHeaderField: "X-Access-Client-Id")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(CitadelClientSecret, forHTTPHeaderField: "X-Access-Secret")
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error -> Void in
@@ -38,6 +42,7 @@ class Citadel {
                 return
             } catch {
                 print("Something went wrong")
+                print(error)
                 completionHandler(nil, error)
                 return
             }
@@ -47,13 +52,13 @@ class Citadel {
     }
     
     func getAccessToken (publicToken: String, completionHandler:@escaping (String?, Error?) -> Void ) -> URLSessionTask {
-        let url = URL(string: "\(CitadelAPIUrl)access-tokens/")!
+        let url = URL(string: "\(CitadelAPIUrl)link-access-tokens/")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(CitadelClientID, forHTTPHeaderField: "X-Access-Client-Id")
         request.setValue(CitadelClientSecret, forHTTPHeaderField: "X-Access-Secret")
-        let json: [String: Any] = ["public_tokens": [publicToken]]
+        let json: [String: Any] = ["public_token": publicToken]
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: json)
             request.httpBody = jsonData
@@ -73,7 +78,7 @@ class Citadel {
             do {
                 let decoder = JSONDecoder()
                 let decodedData = try decoder.decode(AccessTokenResponse.self, from: data)
-                completionHandler(decodedData.access_tokens.first, nil)
+                completionHandler(decodedData.access_token, nil)
             } catch {
                 print("Something went wrong")
                 print(error)
