@@ -87,9 +87,7 @@ class ViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler {
             let uuid = NSUUID().uuidString
             var components = URLComponents(string: "https://cdn-dev.citadelid.com/mobile.html")
             components?.queryItems = [URLQueryItem(name: "bridge_token", value: bridgeToken),
-                                      URLQueryItem(name: "product", value: CitadelProductType),
-                                      URLQueryItem(name: "tracking_info", value: uuid),
-                                      URLQueryItem(name: "client", value: "Your company name")]
+                                      URLQueryItem(name: "tracking_info", value: uuid)]
             let myRequest = URLRequest(url: (components?.url)!)
             self.webView.load(myRequest)
         }

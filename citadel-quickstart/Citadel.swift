@@ -23,8 +23,19 @@ class Citadel {
         request.httpMethod = "POST"
         request.setValue(CitadelClientID, forHTTPHeaderField: "X-Access-Client-Id")
         request.setValue(CitadelClientSecret, forHTTPHeaderField: "X-Access-Secret")
-        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        let parameters: [String: String] = [
+            "product_type": CitadelProductType,
+        ]
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+        } catch let error {
+            print(error.localizedDescription)
+        }
+
         let task = URLSession.shared.dataTask(with: request) { data, response, error -> Void in
+            
             guard let data = data, error == nil else {
                 print(error?.localizedDescription ?? "No data")
                 completionHandler(nil, error)
