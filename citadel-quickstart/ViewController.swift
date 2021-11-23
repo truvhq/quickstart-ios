@@ -85,7 +85,7 @@ class ViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler {
                 // create post request
         citadel.getBridgeToken() { bridgeToken, error in
             let uuid = NSUUID().uuidString
-            var components = URLComponents(string: "https://cdn-dev.citadelid.com/mobile.html")
+            var components = URLComponents(string: "https://cdn.citadelid.com/mobile.html")
             components?.queryItems = [URLQueryItem(name: "bridge_token", value: bridgeToken),
                                       URLQueryItem(name: "tracking_info", value: uuid)]
             let myRequest = URLRequest(url: (components?.url)!)

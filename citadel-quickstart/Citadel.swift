@@ -25,9 +25,27 @@ class Citadel {
         request.setValue(CitadelClientSecret, forHTTPHeaderField: "X-Access-Secret")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
-        let parameters: [String: String] = [
+        var parameters: [String: Any] = [
             "product_type": CitadelProductType,
         ]
+        if (CitadelProductType == "deposit_switch" || CitadelProductType == "fas" || CitadelProductType == "pll") {
+            var account = [
+                "account_number": CitadelAccountNumber,
+                "routing_number": CitadelRoutingNumber,
+                "account_type": CitadelAccountType,
+                "bank_name": CitadelBankName,
+            ]
+            // required for `pll` and `deposit_switch`, ["entire", "amount", "percent"]
+            if ((CitadelProductType == "deposit_switch" || CitadelProductType == "pll") && !CitadelDepositType.isEmpty) {
+                account["deposit_type"] = CitadelDepositType
+            }
+            // required for `pll` and `deposit_switch`
+            if (CitadelProductType == "deposit_switch" || CitadelProductType == "pll" && !CitadelDepositAmount.isEmpty) {
+                account["deposit_value"] = CitadelDepositAmount
+            }
+            
+            parameters["account"] = account
+        }
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
         } catch let error {
@@ -35,7 +53,7 @@ class Citadel {
         }
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error -> Void in
-            
+            print(String(data: data!, encoding: String.Encoding.utf8) as String?)
             guard let data = data, error == nil else {
                 print(error?.localizedDescription ?? "No data")
                 completionHandler(nil, error)
