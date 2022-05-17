@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  citadel-quickstart
+//  truv-quickstart
 //
 //  Created by Anton Rodin on 12.01.2021.
 //

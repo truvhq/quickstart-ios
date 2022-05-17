@@ -3,7 +3,7 @@ import WebKit
 
 class ViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler {
 
-    lazy var citadel = Citadel()
+    lazy var truv = Truv()
     
     lazy var webView: WKWebView = {
         let webConfiguration = WKWebViewConfiguration()
@@ -41,8 +41,8 @@ class ViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler {
                 present(doneScreen, animated: true)
             } else {
                 let publicToken = (payload?["public_token"] as! String)
-                _ = citadel.getAccessToken(publicToken: publicToken) { accessToken, error in
-                    if(CitadelProductType == "employment") {
+                _ = truv.getAccessToken(publicToken: publicToken) { accessToken, error in
+                    if(TruvProductType == "employment") {
                         self.setupEmployment(accessToken: accessToken!)
                     } else {
                         self.setupIncome(accessToken: accessToken!)
@@ -53,7 +53,7 @@ class ViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler {
     }
     
     func setupEmployment(accessToken: String) {
-        _ = self.citadel.getEmploymentInfoByToken(accessToken: (accessToken)) { result, error in
+        _ = self.truv.getEmploymentInfoByToken(accessToken: (accessToken)) { result, error in
             if(result != nil) {
                 DispatchQueue.main.async {
                     let finalView = EmploymentView(data: result!)
@@ -78,7 +78,7 @@ class ViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler {
     }
     
     func setupIncome(accessToken: String) {
-        _ = self.citadel.getIncomeInfoByToken(accessToken: (accessToken)) { result, error in
+        _ = self.truv.getIncomeInfoByToken(accessToken: (accessToken)) { result, error in
             if(result != nil) {
                 DispatchQueue.main.async {
                     let finalView = IncomeView(data: result!)
@@ -131,9 +131,9 @@ class ViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler {
         //        let jsonData = try? JSONSerialization.data(withJSONObject: json)
 
                 // create post request
-        _ = citadel.getBridgeToken() { bridgeToken, error in
+        _ = truv.getBridgeToken() { bridgeToken, error in
             let uuid = NSUUID().uuidString
-            var components = URLComponents(string: "https://cdn.citadelid.com/mobile.html")
+            var components = URLComponents(string: "https://cdn.truv.com/mobile.html")
             components?.queryItems = [URLQueryItem(name: "bridge_token", value: bridgeToken)]
             let myRequest = URLRequest(url: (components?.url)!)
             self.webView.load(myRequest)
