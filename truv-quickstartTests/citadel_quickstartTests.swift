@@ -1,14 +1,14 @@
 //
-//  citadel_quickstartTests.swift
-//  citadel-quickstartTests
+//  truv_quickstartTests.swift
+//  truv-quickstartTests
 //
 //  Created by Anton Rodin on 12.01.2021.
 //
 
 import XCTest
-@testable import citadel_quickstart
+@testable import truv_quickstart
 
-class citadel_quickstartTests: XCTestCase {
+class truv_quickstartTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

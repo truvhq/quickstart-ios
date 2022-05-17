@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		0000CD8325BF357600FCF086 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0000CD8225BF357600FCF086 /* Constants.swift */; };
-		0000CD8825BF980900FCF086 /* Citadel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0000CD8725BF980900FCF086 /* Citadel.swift */; };
+		0000CD8825BF980900FCF086 /* Truv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0000CD8725BF980900FCF086 /* Truv.swift */; };
 		007BECDA25C7392E00F31019 /* EmploymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007BECD925C7392E00F31019 /* EmploymentView.swift */; };
 		007BECE725C7821B00F31019 /* IncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007BECE625C7821B00F31019 /* IncomeView.swift */; };
 		3A2E865325ADBAC6000D93BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2E865225ADBAC6000D93BA /* AppDelegate.swift */; };
 		3A2E865925ADBACA000D93BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A2E865825ADBACA000D93BA /* Assets.xcassets */; };
 		3A2E865C25ADBACA000D93BA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A2E865B25ADBACA000D93BA /* Preview Assets.xcassets */; };
-		3A2E866A25ADBACA000D93BA /* citadel_quickstartTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2E866925ADBACA000D93BA /* citadel_quickstartTests.swift */; };
-		3A2E867525ADBACA000D93BA /* citadel_quickstartUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2E867425ADBACA000D93BA /* citadel_quickstartUITests.swift */; };
+		3A2E866A25ADBACA000D93BA /* truv_quickstartTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2E866925ADBACA000D93BA /* truv_quickstartTests.swift */; };
+		3A2E867525ADBACA000D93BA /* truv_quickstartUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2E867425ADBACA000D93BA /* truv_quickstartUITests.swift */; };
 		3A2E868A25ADBB22000D93BA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2E868825ADBB21000D93BA /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,31 +25,31 @@
 			containerPortal = 3A2E864725ADBAC6000D93BA /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 3A2E864E25ADBAC6000D93BA;
-			remoteInfo = "citadel-quickstart";
+			remoteInfo = "truv-quickstart";
 		};
 		3A2E867125ADBACA000D93BA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3A2E864725ADBAC6000D93BA /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 3A2E864E25ADBAC6000D93BA;
-			remoteInfo = "citadel-quickstart";
+			remoteInfo = "truv-quickstart";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0000CD8225BF357600FCF086 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		0000CD8725BF980900FCF086 /* Citadel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Citadel.swift; sourceTree = "<group>"; };
+		0000CD8725BF980900FCF086 /* Truv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Truv.swift; sourceTree = "<group>"; };
 		007BECD925C7392E00F31019 /* EmploymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmploymentView.swift; sourceTree = "<group>"; };
 		007BECE625C7821B00F31019 /* IncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeView.swift; sourceTree = "<group>"; };
-		3A2E864F25ADBAC6000D93BA /* citadel-quickstart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "citadel-quickstart.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A2E864F25ADBAC6000D93BA /* truv-quickstart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "truv-quickstart.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A2E865225ADBAC6000D93BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A2E865825ADBACA000D93BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A2E865B25ADBACA000D93BA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		3A2E866525ADBACA000D93BA /* citadel-quickstartTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "citadel-quickstartTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A2E866925ADBACA000D93BA /* citadel_quickstartTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = citadel_quickstartTests.swift; sourceTree = "<group>"; };
+		3A2E866525ADBACA000D93BA /* truv-quickstartTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "truv-quickstartTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A2E866925ADBACA000D93BA /* truv_quickstartTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = truv_quickstartTests.swift; sourceTree = "<group>"; };
 		3A2E866B25ADBACA000D93BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3A2E867025ADBACA000D93BA /* citadel-quickstartUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "citadel-quickstartUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A2E867425ADBACA000D93BA /* citadel_quickstartUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = citadel_quickstartUITests.swift; sourceTree = "<group>"; };
+		3A2E867025ADBACA000D93BA /* truv-quickstartUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "truv-quickstartUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A2E867425ADBACA000D93BA /* truv_quickstartUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = truv_quickstartUITests.swift; sourceTree = "<group>"; };
 		3A2E867625ADBACA000D93BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A2E868825ADBB21000D93BA /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3A2E869225ADBB67000D93BA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "../../ios-bridge-demo/ios-bridge-demo/Info.plist"; sourceTree = "<group>"; };
@@ -83,9 +83,9 @@
 		3A2E864625ADBAC6000D93BA = {
 			isa = PBXGroup;
 			children = (
-				3A2E865125ADBAC6000D93BA /* citadel-quickstart */,
-				3A2E866825ADBACA000D93BA /* citadel-quickstartTests */,
-				3A2E867325ADBACA000D93BA /* citadel-quickstartUITests */,
+				3A2E865125ADBAC6000D93BA /* truv-quickstart */,
+				3A2E866825ADBACA000D93BA /* truv-quickstartTests */,
+				3A2E867325ADBACA000D93BA /* truv-quickstartUITests */,
 				3A2E865025ADBAC6000D93BA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -93,14 +93,14 @@
 		3A2E865025ADBAC6000D93BA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3A2E864F25ADBAC6000D93BA /* citadel-quickstart.app */,
-				3A2E866525ADBACA000D93BA /* citadel-quickstartTests.xctest */,
-				3A2E867025ADBACA000D93BA /* citadel-quickstartUITests.xctest */,
+				3A2E864F25ADBAC6000D93BA /* truv-quickstart.app */,
+				3A2E866525ADBACA000D93BA /* truv-quickstartTests.xctest */,
+				3A2E867025ADBACA000D93BA /* truv-quickstartUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3A2E865125ADBAC6000D93BA /* citadel-quickstart */ = {
+		3A2E865125ADBAC6000D93BA /* truv-quickstart */ = {
 			isa = PBXGroup;
 			children = (
 				3A2E869225ADBB67000D93BA /* Info.plist */,
@@ -109,11 +109,11 @@
 				3A2E865825ADBACA000D93BA /* Assets.xcassets */,
 				3A2E865A25ADBACA000D93BA /* Preview Content */,
 				0000CD8225BF357600FCF086 /* Constants.swift */,
-				0000CD8725BF980900FCF086 /* Citadel.swift */,
+				0000CD8725BF980900FCF086 /* Truv.swift */,
 				007BECD925C7392E00F31019 /* EmploymentView.swift */,
 				007BECE625C7821B00F31019 /* IncomeView.swift */,
 			);
-			path = "citadel-quickstart";
+			path = "truv-quickstart";
 			sourceTree = "<group>";
 		};
 		3A2E865A25ADBACA000D93BA /* Preview Content */ = {
@@ -124,30 +124,30 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		3A2E866825ADBACA000D93BA /* citadel-quickstartTests */ = {
+		3A2E866825ADBACA000D93BA /* truv-quickstartTests */ = {
 			isa = PBXGroup;
 			children = (
-				3A2E866925ADBACA000D93BA /* citadel_quickstartTests.swift */,
+				3A2E866925ADBACA000D93BA /* truv_quickstartTests.swift */,
 				3A2E866B25ADBACA000D93BA /* Info.plist */,
 			);
-			path = "citadel-quickstartTests";
+			path = "truv-quickstartTests";
 			sourceTree = "<group>";
 		};
-		3A2E867325ADBACA000D93BA /* citadel-quickstartUITests */ = {
+		3A2E867325ADBACA000D93BA /* truv-quickstartUITests */ = {
 			isa = PBXGroup;
 			children = (
-				3A2E867425ADBACA000D93BA /* citadel_quickstartUITests.swift */,
+				3A2E867425ADBACA000D93BA /* truv_quickstartUITests.swift */,
 				3A2E867625ADBACA000D93BA /* Info.plist */,
 			);
-			path = "citadel-quickstartUITests";
+			path = "truv-quickstartUITests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3A2E864E25ADBAC6000D93BA /* citadel-quickstart */ = {
+		3A2E864E25ADBAC6000D93BA /* truv-quickstart */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3A2E867925ADBACB000D93BA /* Build configuration list for PBXNativeTarget "citadel-quickstart" */;
+			buildConfigurationList = 3A2E867925ADBACB000D93BA /* Build configuration list for PBXNativeTarget "truv-quickstart" */;
 			buildPhases = (
 				3A2E864B25ADBAC6000D93BA /* Sources */,
 				3A2E864C25ADBAC6000D93BA /* Frameworks */,
@@ -157,14 +157,14 @@
 			);
 			dependencies = (
 			);
-			name = "citadel-quickstart";
-			productName = "citadel-quickstart";
-			productReference = 3A2E864F25ADBAC6000D93BA /* citadel-quickstart.app */;
+			name = "truv-quickstart";
+			productName = "truv-quickstart";
+			productReference = 3A2E864F25ADBAC6000D93BA /* truv-quickstart.app */;
 			productType = "com.apple.product-type.application";
 		};
-		3A2E866425ADBACA000D93BA /* citadel-quickstartTests */ = {
+		3A2E866425ADBACA000D93BA /* truv-quickstartTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3A2E867C25ADBACB000D93BA /* Build configuration list for PBXNativeTarget "citadel-quickstartTests" */;
+			buildConfigurationList = 3A2E867C25ADBACB000D93BA /* Build configuration list for PBXNativeTarget "truv-quickstartTests" */;
 			buildPhases = (
 				3A2E866125ADBACA000D93BA /* Sources */,
 				3A2E866225ADBACA000D93BA /* Frameworks */,
@@ -175,14 +175,14 @@
 			dependencies = (
 				3A2E866725ADBACA000D93BA /* PBXTargetDependency */,
 			);
-			name = "citadel-quickstartTests";
-			productName = "citadel-quickstartTests";
-			productReference = 3A2E866525ADBACA000D93BA /* citadel-quickstartTests.xctest */;
+			name = "truv-quickstartTests";
+			productName = "truv-quickstartTests";
+			productReference = 3A2E866525ADBACA000D93BA /* truv-quickstartTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		3A2E866F25ADBACA000D93BA /* citadel-quickstartUITests */ = {
+		3A2E866F25ADBACA000D93BA /* truv-quickstartUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3A2E867F25ADBACB000D93BA /* Build configuration list for PBXNativeTarget "citadel-quickstartUITests" */;
+			buildConfigurationList = 3A2E867F25ADBACB000D93BA /* Build configuration list for PBXNativeTarget "truv-quickstartUITests" */;
 			buildPhases = (
 				3A2E866C25ADBACA000D93BA /* Sources */,
 				3A2E866D25ADBACA000D93BA /* Frameworks */,
@@ -193,9 +193,9 @@
 			dependencies = (
 				3A2E867225ADBACA000D93BA /* PBXTargetDependency */,
 			);
-			name = "citadel-quickstartUITests";
-			productName = "citadel-quickstartUITests";
-			productReference = 3A2E867025ADBACA000D93BA /* citadel-quickstartUITests.xctest */;
+			name = "truv-quickstartUITests";
+			productName = "truv-quickstartUITests";
+			productReference = 3A2E867025ADBACA000D93BA /* truv-quickstartUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -220,7 +220,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3A2E864A25ADBAC6000D93BA /* Build configuration list for PBXProject "citadel-quickstart" */;
+			buildConfigurationList = 3A2E864A25ADBAC6000D93BA /* Build configuration list for PBXProject "truv-quickstart" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -233,9 +233,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3A2E864E25ADBAC6000D93BA /* citadel-quickstart */,
-				3A2E866425ADBACA000D93BA /* citadel-quickstartTests */,
-				3A2E866F25ADBACA000D93BA /* citadel-quickstartUITests */,
+				3A2E864E25ADBAC6000D93BA /* truv-quickstart */,
+				3A2E866425ADBACA000D93BA /* truv-quickstartTests */,
+				3A2E866F25ADBACA000D93BA /* truv-quickstartUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -275,7 +275,7 @@
 				007BECE725C7821B00F31019 /* IncomeView.swift in Sources */,
 				007BECDA25C7392E00F31019 /* EmploymentView.swift in Sources */,
 				3A2E865325ADBAC6000D93BA /* AppDelegate.swift in Sources */,
-				0000CD8825BF980900FCF086 /* Citadel.swift in Sources */,
+				0000CD8825BF980900FCF086 /* Truv.swift in Sources */,
 				0000CD8325BF357600FCF086 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -284,7 +284,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A2E866A25ADBACA000D93BA /* citadel_quickstartTests.swift in Sources */,
+				3A2E866A25ADBACA000D93BA /* truv_quickstartTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,7 +292,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A2E867525ADBACA000D93BA /* citadel_quickstartUITests.swift in Sources */,
+				3A2E867525ADBACA000D93BA /* truv_quickstartUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,12 +301,12 @@
 /* Begin PBXTargetDependency section */
 		3A2E866725ADBACA000D93BA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3A2E864E25ADBAC6000D93BA /* citadel-quickstart */;
+			target = 3A2E864E25ADBAC6000D93BA /* truv-quickstart */;
 			targetProxy = 3A2E866625ADBACA000D93BA /* PBXContainerItemProxy */;
 		};
 		3A2E867225ADBACA000D93BA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3A2E864E25ADBAC6000D93BA /* citadel-quickstart */;
+			target = 3A2E864E25ADBAC6000D93BA /* truv-quickstart */;
 			targetProxy = 3A2E867125ADBACA000D93BA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -434,14 +434,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"citadel-quickstart/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"truv-quickstart/Preview Content\"";
+				DEVELOPMENT_TEAM = 3HHM2RZ73P;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "citadel-quickstart/Info.plist";
+				INFOPLIST_FILE = "truv-quickstart/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Citadel.citadel-quickstart";
+				PRODUCT_BUNDLE_IDENTIFIER = "Truv.truv-quickstart";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -454,14 +455,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"citadel-quickstart/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"truv-quickstart/Preview Content\"";
+				DEVELOPMENT_TEAM = 3HHM2RZ73P;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "citadel-quickstart/Info.plist";
+				INFOPLIST_FILE = "truv-quickstart/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Citadel.citadel-quickstart";
+				PRODUCT_BUNDLE_IDENTIFIER = "Truv.truv-quickstart";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -474,18 +476,18 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "citadel-quickstartTests/Info.plist";
+				INFOPLIST_FILE = "truv-quickstartTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Citadel.citadel-quickstartTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "Truv.truv-quickstartTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/citadel-quickstart.app/citadel-quickstart";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/truv-quickstart.app/truv-quickstart";
 			};
 			name = Debug;
 		};
@@ -495,18 +497,18 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "citadel-quickstartTests/Info.plist";
+				INFOPLIST_FILE = "truv-quickstartTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Citadel.citadel-quickstartTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "Truv.truv-quickstartTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/citadel-quickstart.app/citadel-quickstart";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/truv-quickstart.app/truv-quickstart";
 			};
 			name = Release;
 		};
@@ -515,17 +517,17 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "citadel-quickstartUITests/Info.plist";
+				INFOPLIST_FILE = "truv-quickstartUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Citadel.citadel-quickstartUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "Truv.truv-quickstartUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "citadel-quickstart";
+				TEST_TARGET_NAME = "truv-quickstart";
 			};
 			name = Debug;
 		};
@@ -534,24 +536,24 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "citadel-quickstartUITests/Info.plist";
+				INFOPLIST_FILE = "truv-quickstartUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Citadel.citadel-quickstartUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "Truv.truv-quickstartUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "citadel-quickstart";
+				TEST_TARGET_NAME = "truv-quickstart";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3A2E864A25ADBAC6000D93BA /* Build configuration list for PBXProject "citadel-quickstart" */ = {
+		3A2E864A25ADBAC6000D93BA /* Build configuration list for PBXProject "truv-quickstart" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3A2E867725ADBACA000D93BA /* Debug */,
@@ -560,7 +562,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3A2E867925ADBACB000D93BA /* Build configuration list for PBXNativeTarget "citadel-quickstart" */ = {
+		3A2E867925ADBACB000D93BA /* Build configuration list for PBXNativeTarget "truv-quickstart" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3A2E867A25ADBACB000D93BA /* Debug */,
@@ -569,7 +571,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3A2E867C25ADBACB000D93BA /* Build configuration list for PBXNativeTarget "citadel-quickstartTests" */ = {
+		3A2E867C25ADBACB000D93BA /* Build configuration list for PBXNativeTarget "truv-quickstartTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3A2E867D25ADBACB000D93BA /* Debug */,
@@ -578,7 +580,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3A2E867F25ADBACB000D93BA /* Build configuration list for PBXNativeTarget "citadel-quickstartUITests" */ = {
+		3A2E867F25ADBACB000D93BA /* Build configuration list for PBXNativeTarget "truv-quickstartUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3A2E868025ADBACB000D93BA /* Debug */,

@@ -1,6 +1,6 @@
 //
-//  Citadel.swift
-//  citadel-quickstart
+//  Truv.swift
+//  truv-quickstart
 //
 //  Created by Rey Riel on 1/25/21.
 //
@@ -15,18 +15,18 @@ struct AccessTokenResponse: Decodable {
     var access_token: String
 }
 
-class Citadel {
+class Truv {
     
     func getBridgeToken (completionHandler:@escaping (String?, Error?) -> Void ) -> URLSessionTask {
-        let url = URL(string: "\(CitadelAPIUrl)bridge-tokens/")!
-        let json: [String: Any] = ["product_type": CitadelProductType]
+        let url = URL(string: "\(TruvUrl)bridge-tokens/")!
+        let json: [String: Any] = ["product_type": TruvProductType]
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.httpBody = jsonData
-        request.setValue(CitadelClientID, forHTTPHeaderField: "X-Access-Client-Id")
+        request.setValue(TruvClientID, forHTTPHeaderField: "X-Access-Client-Id")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(CitadelClientSecret, forHTTPHeaderField: "X-Access-Secret")
+        request.setValue(TruvClientSecret, forHTTPHeaderField: "X-Access-Secret")
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error -> Void in
             guard let data = data, error == nil else {
@@ -52,12 +52,12 @@ class Citadel {
     }
     
     func getAccessToken (publicToken: String, completionHandler:@escaping (String?, Error?) -> Void ) -> URLSessionTask {
-        let url = URL(string: "\(CitadelAPIUrl)link-access-tokens/")!
+        let url = URL(string: "\(TruvUrl)link-access-tokens/")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(CitadelClientID, forHTTPHeaderField: "X-Access-Client-Id")
-        request.setValue(CitadelClientSecret, forHTTPHeaderField: "X-Access-Secret")
+        request.setValue(TruvClientID, forHTTPHeaderField: "X-Access-Client-Id")
+        request.setValue(TruvClientSecret, forHTTPHeaderField: "X-Access-Secret")
         let json: [String: Any] = ["public_token": publicToken]
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: json)
@@ -90,12 +90,12 @@ class Citadel {
     }
     
     func getEmploymentInfoByToken (accessToken: String, completionHandler:@escaping ([String: Any]?, Error?) -> Void ) -> URLSessionTask {
-        let url = URL(string: "\(CitadelAPIUrl)verifications/employments/")!
+        let url = URL(string: "\(TruvUrl)verifications/employments/")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(CitadelClientID, forHTTPHeaderField: "X-Access-Client-Id")
-        request.setValue(CitadelClientSecret, forHTTPHeaderField: "X-Access-Secret")
+        request.setValue(TruvClientID, forHTTPHeaderField: "X-Access-Client-Id")
+        request.setValue(TruvClientSecret, forHTTPHeaderField: "X-Access-Secret")
         let json: [String: Any] = ["access_token": accessToken]
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: json)
@@ -120,12 +120,12 @@ class Citadel {
     }
     
     func getIncomeInfoByToken (accessToken: String, completionHandler:@escaping ([String: Any]?, Error?) -> Void ) -> URLSessionTask {
-        let url = URL(string: "\(CitadelAPIUrl)verifications/incomes/")!
+        let url = URL(string: "\(TruvUrl)verifications/incomes/")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(CitadelClientID, forHTTPHeaderField: "X-Access-Client-Id")
-        request.setValue(CitadelClientSecret, forHTTPHeaderField: "X-Access-Secret")
+        request.setValue(TruvClientID, forHTTPHeaderField: "X-Access-Client-Id")
+        request.setValue(TruvClientSecret, forHTTPHeaderField: "X-Access-Secret")
         let json: [String: Any] = ["access_token": accessToken]
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: json)
