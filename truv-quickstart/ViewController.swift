@@ -1,18 +1,11 @@
 import UIKit
-import WebKit
+import TruvSDK
 
-class ViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler {
+class ViewController: UIViewController {
 
-    lazy var truvService = TruvService()
+    private lazy var truvService = TruvService()
 
-    lazy var webView: WKWebView = {
-        let webConfiguration = WKWebViewConfiguration()
-        webConfiguration.userContentController.add(self, name: "iosListener")
-        let webView = WKWebView(frame: .zero, configuration: webConfiguration)
-        webView.uiDelegate = self
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        return webView
-    }()
+    private var browserView: TruvBridgeView?
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -24,41 +17,13 @@ class ViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler {
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
-    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        let body = message.body as! NSDictionary
-        let event = body["event"] as! String
-        let payload = body["payload"] as? NSDictionary
-        print(event)
-        if ((payload) != nil) {
-            print(payload as Any)
-        }
-        
-        if (event == "onClose" || event == "onSuccess") {
-            print("close webview")
-            if (event == "onClose") {
-                let doneScreen = SuccessScreen()
-                doneScreen.result = "Verification wasn't finished"
-                present(doneScreen, animated: true)
-            } else {
-                let publicToken = (payload?["public_token"] as! String)
-                truvService.getAccessToken(publicToken: publicToken) { accessToken, error in
-                    if(TruvProductType == "employment") {
-                        self.setupEmployment(accessToken: accessToken!)
-                    } else {
-                        self.setupIncome(accessToken: accessToken!)
-                    }
-                }
-            }
-        }
-    }
-    
     func setupEmployment(accessToken: String) {
         truvService.getEmploymentInfoByToken(accessToken: (accessToken)) { result, error in
             if(result != nil) {
                 DispatchQueue.main.async {
                     let finalView = EmploymentView(data: result!)
                     
-                    self.webView.removeFromSuperview()
+                    self.browserView?.removeFromSuperview()
                     self.view.addSubview(finalView)
                     
                     NSLayoutConstraint.activate([
@@ -83,7 +48,7 @@ class ViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler {
                 DispatchQueue.main.async {
                     let finalView = IncomeView(data: result!)
                     
-                    self.webView.removeFromSuperview()
+                    self.browserView?.removeFromSuperview()
                     self.view.addSubview(finalView)
                     
                     NSLayoutConstraint.activate([
@@ -102,7 +67,7 @@ class ViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler {
         }
     }
 
-    func setupUI() {
+    func setupUI(with webView: UIView) {
         self.view.backgroundColor = .white
         self.view.addSubview(webView)
         
@@ -116,21 +81,47 @@ class ViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler {
             webView.rightAnchor
                 .constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor)
         ])
-        
-
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
 
-        truvService.getBridgeToken() { bridgeToken, error in
-            var components = URLComponents(string: "https://cdn.truv.com/mobile.html")
-            components?.queryItems = [URLQueryItem(name: "bridge_token", value: bridgeToken)]
-            let myRequest = URLRequest(url: (components?.url)!)
-            self.webView.load(myRequest)
+        truvService.getBridgeToken() { [weak self] bridgeToken, _ in
+            guard let self = self, let bridgeToken = bridgeToken else { return }
+
+            DispatchQueue.main.async {
+                let webView = TruvBridgeView(token: bridgeToken, delegate: self)
+                self.setupUI(with: webView)
+                self.browserView = webView
+            }
         }
     }
+}
+
+extension ViewController: TruvDelegate {
+
+    func onEvent(_ event: TruvEvent) {
+        print(event)
+
+        switch event {
+        case .onClose:
+            let doneScreen = SuccessScreen()
+            doneScreen.result = "Verification wasn't finished"
+            present(doneScreen, animated: true)
+        case .onSuccess(let payload):
+            guard let publicToken = payload?.publicToken else { return }
+            truvService.getAccessToken(publicToken: publicToken) { accessToken, error in
+                if(TruvProductType == "employment") {
+                    self.setupEmployment(accessToken: accessToken!)
+                } else {
+                    self.setupIncome(accessToken: accessToken!)
+                }
+            }
+        default:
+            break
+        }
+    }
+
 }
 
 class SuccessScreen: UIViewController {
