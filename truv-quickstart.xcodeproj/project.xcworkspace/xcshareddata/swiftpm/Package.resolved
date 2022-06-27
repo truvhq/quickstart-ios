@@ -5,7 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/truvhq/ios-sdk",
       "state" : {
-        "revision" : "9a2f7024f78242cda269731f13861903fb351cc7"
+        "branch" : "master",
+        "revision" : "c08c7892f37484117b49e4b274829257be2fefd8"
       }
     }
   ],
