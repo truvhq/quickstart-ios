@@ -15,10 +15,11 @@ struct AccessTokenResponse: Decodable {
     var access_token: String
 }
 
-class Truv {
-    
-    func getBridgeToken (completionHandler:@escaping (String?, Error?) -> Void ) -> URLSessionTask {
-        let url = URL(string: "\(TruvUrl)bridge-tokens/")!
+class TruvService {
+
+    @discardableResult
+    func getBridgeToken(completionHandler:@escaping (String?, Error?) -> Void) -> URLSessionTask {
+        let url = URL(string: "\(TruvAPIUrl)bridge-tokens/")!
         let json: [String: Any] = ["product_type": TruvProductType]
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         var request = URLRequest(url: url)
@@ -50,9 +51,10 @@ class Truv {
         task.resume()
         return task
     }
-    
-    func getAccessToken (publicToken: String, completionHandler:@escaping (String?, Error?) -> Void ) -> URLSessionTask {
-        let url = URL(string: "\(TruvUrl)link-access-tokens/")!
+
+    @discardableResult
+    func getAccessToken(publicToken: String, completionHandler:@escaping (String?, Error?) -> Void) -> URLSessionTask {
+        let url = URL(string: "\(TruvAPIUrl)link-access-tokens/")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -88,9 +90,10 @@ class Truv {
         task.resume()
         return task
     }
-    
-    func getEmploymentInfoByToken (accessToken: String, completionHandler:@escaping ([String: Any]?, Error?) -> Void ) -> URLSessionTask {
-        let url = URL(string: "\(TruvUrl)verifications/employments/")!
+
+    @discardableResult
+    func getEmploymentInfoByToken(accessToken: String, completionHandler:@escaping ([String: Any]?, Error?) -> Void) -> URLSessionTask {
+        let url = URL(string: "\(TruvAPIUrl)verifications/employments/")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -118,9 +121,10 @@ class Truv {
         task.resume()
         return task
     }
-    
-    func getIncomeInfoByToken (accessToken: String, completionHandler:@escaping ([String: Any]?, Error?) -> Void ) -> URLSessionTask {
-        let url = URL(string: "\(TruvUrl)verifications/incomes/")!
+
+    @discardableResult
+    func getIncomeInfoByToken(accessToken: String, completionHandler: @escaping ([String: Any]?, Error?) -> Void) -> URLSessionTask {
+        let url = URL(string: "\(TruvAPIUrl)verifications/incomes/")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")

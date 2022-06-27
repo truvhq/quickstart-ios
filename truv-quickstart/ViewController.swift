@@ -3,8 +3,8 @@ import WebKit
 
 class ViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler {
 
-    lazy var truv = Truv()
-    
+    lazy var truvService = TruvService()
+
     lazy var webView: WKWebView = {
         let webConfiguration = WKWebViewConfiguration()
         webConfiguration.userContentController.add(self, name: "iosListener")
@@ -41,7 +41,7 @@ class ViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler {
                 present(doneScreen, animated: true)
             } else {
                 let publicToken = (payload?["public_token"] as! String)
-                _ = truv.getAccessToken(publicToken: publicToken) { accessToken, error in
+                truvService.getAccessToken(publicToken: publicToken) { accessToken, error in
                     if(TruvProductType == "employment") {
                         self.setupEmployment(accessToken: accessToken!)
                     } else {
@@ -53,7 +53,7 @@ class ViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler {
     }
     
     func setupEmployment(accessToken: String) {
-        _ = self.truv.getEmploymentInfoByToken(accessToken: (accessToken)) { result, error in
+        truvService.getEmploymentInfoByToken(accessToken: (accessToken)) { result, error in
             if(result != nil) {
                 DispatchQueue.main.async {
                     let finalView = EmploymentView(data: result!)
@@ -78,7 +78,7 @@ class ViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler {
     }
     
     func setupIncome(accessToken: String) {
-        _ = self.truv.getIncomeInfoByToken(accessToken: (accessToken)) { result, error in
+        truvService.getIncomeInfoByToken(accessToken: (accessToken)) { result, error in
             if(result != nil) {
                 DispatchQueue.main.async {
                     let finalView = IncomeView(data: result!)
@@ -123,16 +123,8 @@ class ViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        
-        //        // prepare json data
-        //        let json: [String: Any] = ["title": "ABC",
-        //                                   "dict": ["1":"First", "2":"Second"]]
-        //
-        //        let jsonData = try? JSONSerialization.data(withJSONObject: json)
 
-                // create post request
-        _ = truv.getBridgeToken() { bridgeToken, error in
-            let uuid = NSUUID().uuidString
+        truvService.getBridgeToken() { bridgeToken, error in
             var components = URLComponents(string: "https://cdn.truv.com/mobile.html")
             components?.queryItems = [URLQueryItem(name: "bridge_token", value: bridgeToken)]
             let myRequest = URLRequest(url: (components?.url)!)
