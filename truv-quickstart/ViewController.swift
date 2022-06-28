@@ -5,7 +5,7 @@ class ViewController: UIViewController {
 
     private lazy var truvService = TruvService()
 
-    private var browserView: TruvBridgeView?
+    private var bridgeView: TruvBridgeView?
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -23,7 +23,7 @@ class ViewController: UIViewController {
                 DispatchQueue.main.async {
                     let finalView = EmploymentView(data: result!)
                     
-                    self.browserView?.removeFromSuperview()
+                    self.bridgeView?.removeFromSuperview()
                     self.view.addSubview(finalView)
                     
                     NSLayoutConstraint.activate([
@@ -48,7 +48,7 @@ class ViewController: UIViewController {
                 DispatchQueue.main.async {
                     let finalView = IncomeView(data: result!)
                     
-                    self.browserView?.removeFromSuperview()
+                    self.bridgeView?.removeFromSuperview()
                     self.view.addSubview(finalView)
                     
                     NSLayoutConstraint.activate([
@@ -67,18 +67,18 @@ class ViewController: UIViewController {
         }
     }
 
-    func setupUI(with webView: UIView) {
+    func setupUI(with bridgeView: UIView) {
         self.view.backgroundColor = .white
-        self.view.addSubview(webView)
+        self.view.addSubview(bridgeView)
         
         NSLayoutConstraint.activate([
-            webView.topAnchor
+            bridgeView.topAnchor
                 .constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            webView.leftAnchor
+            bridgeView.leftAnchor
                 .constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor),
-            webView.bottomAnchor
+            bridgeView.bottomAnchor
                 .constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-            webView.rightAnchor
+            bridgeView.rightAnchor
                 .constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor)
         ])
     }
@@ -90,9 +90,9 @@ class ViewController: UIViewController {
             guard let self = self, let bridgeToken = bridgeToken else { return }
 
             DispatchQueue.main.async {
-                let webView = TruvBridgeView(token: bridgeToken, delegate: self)
-                self.setupUI(with: webView)
-                self.browserView = webView
+                let bridgeView = TruvBridgeView(token: bridgeToken, delegate: self)
+                self.setupUI(with: bridgeView)
+                self.bridgeView = bridgeView
             }
         }
     }
