@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/truvhq/ios-sdk",
+      "state" : {
+        "branch" : "master",
+        "revision" : "c08c7892f37484117b49e4b274829257be2fefd8"
+      }
+    }
+  ],
+  "version" : 2
+}
