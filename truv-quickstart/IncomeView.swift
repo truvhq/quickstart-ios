@@ -115,7 +115,7 @@ class IncomeView: UIStackView {
         title = employment["job_title"] as? String
         startDate = employment["start_date"] as? String
         endDate = employment["end_date"] as? String
-        income = employment["annual_salary"] as? String
+        income = employment["income"] as? String
     }
     
     func setEmployerValues(employer: [String: Any]) {

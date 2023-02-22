@@ -52,7 +52,7 @@ class TruvService {
     }
     
     func getEmploymentInfoByToken(accessToken: String) async throws -> [String: Any]? {
-        let request = try makeRequest(path: "verifications/employments/", data: ["access_token": accessToken])
+        let request = try makeRequest(path: "links/reports/employment/", data: ["access_token": accessToken])
         
         let (data, _) = try await URLSession.shared.data(for: request)
         
@@ -62,7 +62,7 @@ class TruvService {
     }
     
     func getIncomeInfoByToken(accessToken: String) async throws -> [String: Any]? {
-        let request = try makeRequest(path: "verifications/incomes/", data: ["access_token": accessToken])
+        let request = try makeRequest(path: "links/reports/income/", data: ["access_token": accessToken])
         let (data, _) = try await URLSession.shared.data(for: request)
         
         let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
