@@ -7,6 +7,10 @@
 
 import Foundation
 
+struct CreateUserResponse: Decodable {
+    var id: String
+}
+
 struct BridgeTokenResponse: Decodable {
     var bridge_token: String
 }
@@ -16,140 +20,68 @@ struct AccessTokenResponse: Decodable {
 }
 
 class TruvService {
-
-    @discardableResult
-    func getBridgeToken(completionHandler:@escaping (String?, Error?) -> Void) -> URLSessionTask {
-        let url = URL(string: "\(TruvAPIUrl)bridge-tokens/")!
-        let json: [String: Any] = ["product_type": TruvProductType]
-        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+    
+    func createUser(userId: String) async throws -> String {
+        let request = try makeRequest(path: "users/", data: ["external_user_id": userId])
+        
+        let (data, _) = try await URLSession.shared.data(for: request)
+        
+        let decoder = JSONDecoder()
+        let decodedData = try decoder.decode(CreateUserResponse.self, from: data)
+        return decodedData.id
+    }
+    
+    func getBridgeToken(userId: String) async throws -> String {
+        let request = try makeRequest(path: "users/\(userId)/tokens/", data: ["product_type": TruvProductType])
+        
+        let (data, _) = try await URLSession.shared.data(for: request)
+        
+        let decoder = JSONDecoder()
+        let decodedData = try decoder.decode(BridgeTokenResponse.self, from: data)
+        return decodedData.bridge_token
+    }
+    
+    func getAccessToken(publicToken: String) async throws -> String {
+        let request = try makeRequest(path: "link-access-tokens/", data: ["public_token": publicToken])
+        
+        let (data, _) = try await URLSession.shared.data(for: request)
+        
+        let decoder = JSONDecoder()
+        let decodedData = try decoder.decode(AccessTokenResponse.self, from: data)
+        return decodedData.access_token
+    }
+    
+    func getEmploymentInfoByToken(accessToken: String) async throws -> [String: Any]? {
+        let request = try makeRequest(path: "verifications/employments/", data: ["access_token": accessToken])
+        
+        let (data, _) = try await URLSession.shared.data(for: request)
+        
+        let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+        
+        return json
+    }
+    
+    func getIncomeInfoByToken(accessToken: String) async throws -> [String: Any]? {
+        let request = try makeRequest(path: "verifications/incomes/", data: ["access_token": accessToken])
+        let (data, _) = try await URLSession.shared.data(for: request)
+        
+        let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+        
+        return json
+    }
+    
+    private func makeRequest(path: String, data: [String: Any]) throws -> URLRequest {
+        let url = URL(string: "\(TruvAPIUrl)\(path)")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(TruvClientID, forHTTPHeaderField: "X-Access-Client-Id")
+        request.setValue(TruvClientSecret, forHTTPHeaderField: "X-Access-Secret")
+        
+        
+        let jsonData = try JSONSerialization.data(withJSONObject: data)
         request.httpBody = jsonData
-        request.setValue(TruvClientID, forHTTPHeaderField: "X-Access-Client-Id")
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(TruvClientSecret, forHTTPHeaderField: "X-Access-Secret")
         
-        let task = URLSession.shared.dataTask(with: request) { data, response, error -> Void in
-            guard let data = data, error == nil else {
-                print(error?.localizedDescription ?? "No data")
-                completionHandler(nil, error)
-                return
-            }
-    
-            do {
-                let decoder = JSONDecoder()
-                let decodedData = try decoder.decode(BridgeTokenResponse.self, from: data)
-                completionHandler(decodedData.bridge_token, nil)
-                return
-            } catch {
-                print("Something went wrong")
-                print(error)
-                completionHandler(nil, error)
-                return
-            }
-        }
-        task.resume()
-        return task
-    }
-
-    @discardableResult
-    func getAccessToken(publicToken: String, completionHandler:@escaping (String?, Error?) -> Void) -> URLSessionTask {
-        let url = URL(string: "\(TruvAPIUrl)link-access-tokens/")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(TruvClientID, forHTTPHeaderField: "X-Access-Client-Id")
-        request.setValue(TruvClientSecret, forHTTPHeaderField: "X-Access-Secret")
-        let json: [String: Any] = ["public_token": publicToken]
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: json)
-            request.httpBody = jsonData
-        } catch {
-            print("Access Token Error")
-            print(error)
-            completionHandler(nil, error)
-        }
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error -> Void in
-            guard let data = data, error == nil else {
-                print(error?.localizedDescription ?? "No data")
-                completionHandler(nil, error)
-                return
-            }
-    
-            do {
-                let decoder = JSONDecoder()
-                let decodedData = try decoder.decode(AccessTokenResponse.self, from: data)
-                completionHandler(decodedData.access_token, nil)
-            } catch {
-                print("Something went wrong")
-                print(error)
-                completionHandler(nil, error)
-            }
-        }
-        task.resume()
-        return task
-    }
-
-    @discardableResult
-    func getEmploymentInfoByToken(accessToken: String, completionHandler:@escaping ([String: Any]?, Error?) -> Void) -> URLSessionTask {
-        let url = URL(string: "\(TruvAPIUrl)verifications/employments/")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(TruvClientID, forHTTPHeaderField: "X-Access-Client-Id")
-        request.setValue(TruvClientSecret, forHTTPHeaderField: "X-Access-Secret")
-        let json: [String: Any] = ["access_token": accessToken]
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: json)
-            request.httpBody = jsonData
-        } catch {
-            print("Employment Info by Token Error")
-            print(error)
-            completionHandler(nil, error)
-        }
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error -> Void in
-            guard let data = data, error == nil else {
-                print(error?.localizedDescription ?? "No data")
-                completionHandler(nil, error)
-                return
-            }
-            let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-            completionHandler(json, nil)
-        }
-        task.resume()
-        return task
-    }
-
-    @discardableResult
-    func getIncomeInfoByToken(accessToken: String, completionHandler: @escaping ([String: Any]?, Error?) -> Void) -> URLSessionTask {
-        let url = URL(string: "\(TruvAPIUrl)verifications/incomes/")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(TruvClientID, forHTTPHeaderField: "X-Access-Client-Id")
-        request.setValue(TruvClientSecret, forHTTPHeaderField: "X-Access-Secret")
-        let json: [String: Any] = ["access_token": accessToken]
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: json)
-            request.httpBody = jsonData
-        } catch {
-            print("Employment Info by Token Error")
-            print(error)
-            completionHandler(nil, error)
-        }
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error -> Void in
-            guard let data = data, error == nil else {
-                print(error?.localizedDescription ?? "No data")
-                completionHandler(nil, error)
-                return
-            }
-            let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-            completionHandler(json, nil)
-        }
-        task.resume()
-        return task
+        return request
     }
 }

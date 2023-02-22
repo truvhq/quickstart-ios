@@ -2,48 +2,51 @@ import UIKit
 import TruvSDK
 
 class ViewController: UIViewController {
-
+    
     private lazy var truvService = TruvService()
-
+    
     private var bridgeView: TruvBridgeView?
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
-    func setupEmployment(accessToken: String) {
-        truvService.getEmploymentInfoByToken(accessToken: (accessToken)) { result, error in
-            if(result != nil) {
-                DispatchQueue.main.async {
-                    let finalView = EmploymentView(data: result!)
-                    
-                    self.bridgeView?.removeFromSuperview()
-                    self.view.addSubview(finalView)
-                    
-                    NSLayoutConstraint.activate([
-                        finalView.topAnchor
-                            .constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-                        finalView.leftAnchor
-                            .constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor),
-                        finalView.bottomAnchor
-                            .constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-                        finalView.rightAnchor
-                            .constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor)
-                    ])
-                }
-                
-            }
+    func setupEmployment(accessToken: String) async {
+        do {
+            let result = try await truvService.getEmploymentInfoByToken(accessToken: (accessToken))
+            
+            let finalView = EmploymentView(data: result!)
+            
+            self.bridgeView?.removeFromSuperview()
+            self.view.addSubview(finalView)
+            
+            NSLayoutConstraint.activate([
+                finalView.topAnchor
+                    .constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+                finalView.leftAnchor
+                    .constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor),
+                finalView.bottomAnchor
+                    .constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+                finalView.rightAnchor
+                    .constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor)
+            ])
+            
+        } catch {
+            print("error happened when getting employment info: \(error.localizedDescription)")
         }
     }
+
     
-    func setupIncome(accessToken: String) {
-        truvService.getIncomeInfoByToken(accessToken: (accessToken)) { result, error in
+    func setupIncome(accessToken: String) async {
+        do {
+            let result = try await truvService.getIncomeInfoByToken(accessToken: (accessToken))
+        
             if(result != nil) {
                 DispatchQueue.main.async {
                     let finalView = IncomeView(data: result!)
@@ -64,6 +67,8 @@ class ViewController: UIViewController {
                 }
                 
             }
+        } catch {
+            print("error hapenned when getting income info \(error.localizedDescription)")
         }
     }
 
@@ -86,35 +91,36 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        truvService.getBridgeToken() { [weak self] bridgeToken, _ in
-            guard let self = self, let bridgeToken = bridgeToken else { return }
-
-            DispatchQueue.main.async {
+        Task {
+            do {
+                let userId = try await truvService.createUser(userId: "truv-quickstart")
+                let bridgeToken = try await truvService.getBridgeToken(userId: userId)
+                
                 let bridgeView = TruvBridgeView(token: bridgeToken, delegate: self)
                 self.setupUI(with: bridgeView)
                 self.bridgeView = bridgeView
+            } catch {
+                print("Error while getting bridge token: \(error.localizedDescription)")
             }
         }
     }
 }
 
 extension ViewController: TruvDelegate {
-
     func onEvent(_ event: TruvEvent) {
         print(event)
-
         switch event {
         case .onClose:
-            let doneScreen = SuccessScreen()
-            doneScreen.result = "Verification wasn't finished"
-            present(doneScreen, animated: true)
+            print("Widget closed")
         case .onSuccess(let payload):
             guard let publicToken = payload?.publicToken else { return }
-            truvService.getAccessToken(publicToken: publicToken) { accessToken, error in
+        
+            Task {
+                let accessToken = try await truvService.getAccessToken(publicToken: publicToken)
                 if(TruvProductType == "employment") {
-                    self.setupEmployment(accessToken: accessToken!)
+                    await self.setupEmployment(accessToken: accessToken)
                 } else {
-                    self.setupIncome(accessToken: accessToken!)
+                    await self.setupIncome(accessToken: accessToken)
                 }
             }
         default:
@@ -122,28 +128,4 @@ extension ViewController: TruvDelegate {
         }
     }
 
-}
-
-class SuccessScreen: UIViewController {
-    
-    var result = ""
-    override func viewDidLoad() {
-        let x: CGFloat = 20
-        let y: CGFloat = 40
-        let height: CGFloat = 50
-        let label = UILabel(frame: CGRect(x: x, y: y, width: UIScreen.main.bounds.width, height: height))
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.00)
-        label.text = self.result
-        view.backgroundColor = UIColor(red: 0.46, green: 0.72, blue: 0.51, alpha: 1.00)
-        view.addSubview(label)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
-            label.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-            label.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor)
-        ])
-    }
 }
